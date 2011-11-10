@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Robot name="lbr">
+	<KinBody>
+		<ModelsDir>../../meshes/lbr_v0/</ModelsDir>
+		
+		<Body name="arm_0_link">
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="cylinder">
+				<Radius>0.06</Radius>
+				<Height>0.14</Height>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 -0.07</Translation>
+				<RotationMat>
+					1 0  0
+					0 0 -1
+					0 1  0
+				</RotationMat>
+			</Geom>
+		</Body>
+		
+		<Body name="arm_1_link" type="dynamic">
+			<OffsetFrom>arm_0_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				-0.95507231  0.29637287 0
+				-0.29637287 -0.95507231 0
+				 0           0          1
+			</RotationMat>
+			<Mass>
+				<Total>5.9907</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>lbr1_convex.iv</Data>
+				<Render>lbr1.iv</Render>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+			</Geom>
+		</Body>
+		
+		<Joint name="arm_1_joint" type="hinge">
+			<Body>arm_0_link</Body>
+			<Body>arm_1_link</Body>
+			<OffsetFrom>arm_1_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.9670597283903604 2.9670597283903604</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>1.5708</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="arm_2_link" type="dynamic">
+			<OffsetFrom>arm_1_link</OffsetFrom>
+			<Translation>0 -0.002 0.1915</Translation>
+			<RotationMat>
+				1 0  0
+				0 0 -1
+				0 1  0
+			</RotationMat>
+			<Mass>
+				<Total>5.734939</Total>
+				<Inertia>
+					0.03 0    0
+					0    0.03 0
+					0    0    0.03
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>lbr2_convex.iv</Data>
+				<Render>lbr2.iv</Render>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+			</Geom>
+		</Body>
+		
+		<Joint name="arm_2_joint" type="hinge">
+			<Body>arm_1_link</Body>
+			<Body>arm_2_link</Body>
+			<OffsetFrom>arm_2_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.0943951023931953 2.0943951023931953</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>1.5708</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="arm_3_link" type="dynamic">
+			<OffsetFrom>arm_2_link</OffsetFrom>
+			<Translation>0.0 0.2085 0.0</Translation>
+			<RotationMat>
+				1  0 0
+				0  0 1
+				0 -1 0
+			</RotationMat>
+			<Mass>
+				<Total>4.214668</Total>
+				<Inertia>
+					0.03 0    0
+					0    0.03 0
+					0    0    0.03
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>lbr3_convex.iv</Data>
+				<Render>lbr3.iv</Render>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+			</Geom>
+		</Body>
+		
+		<Joint name="arm_3_joint" type="hinge">
+			<Body>arm_2_link</Body>
+			<Body>arm_3_link</Body>
+			<OffsetFrom>arm_3_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.9670597283903604 2.9670597283903604</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>1.5708</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="arm_4_link" type="dynamic">
+			<OffsetFrom>arm_3_link</OffsetFrom>
+			<Translation>0 0.002 0.1915</Translation>
+			<RotationMat>
+				1  0 0
+				0  0 1
+				0 -1 0
+			</RotationMat>
+			<Mass>
+				<Total>3.669819</Total>
+				<Inertia>
+					0.03 0    0
+					0    0.03 0
+					0    0    0.03
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>lbr4_convex.iv</Data>
+				<Render>lbr4.iv</Render>
+				<DiffuseColor>0.8 0.0 0.0</DiffuseColor>
+			</Geom>
+		</Body>
+		
+		<Joint name="arm_4_joint" type="hinge">
+			<Body>arm_3_link</Body>
+			<Body>arm_4_link</Body>
+			<OffsetFrom>arm_4_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.0943951023931953 2.0943951023931953</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>1.5708</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="arm_5_link" type="dynamic">
+			<OffsetFrom>arm_4_link</OffsetFrom>
+			<Translation>0 -0.2085 0</Translation>
+			<RotationMat>
+				1 0  0
+				0 0 -1
+				0 1  0
+			</RotationMat>
+			<Mass>
+				<Total>2.313272</Total>
+				<Inertia>
+					0.03 0    0
+					0    0.03 0
+					0    0    0.03
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>lbr5_convex.iv</Data>
+				<Render>lbr5.iv</Render>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+			</Geom>
+		</Body>
+		
+		<Joint name="arm_5_joint" type="hinge">
+			<Body>arm_4_link</Body>
+			<Body>arm_5_link</Body>
+			<OffsetFrom>arm_5_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.9670597283903604 2.9670597283903604</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>1.5708</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="arm_6_link" type="dynamic">
+			<OffsetFrom>arm_5_link</OffsetFrom>
+			<Translation>0 0.046 0.1815</Translation>
+			<RotationMat>
+				1 0  0
+				0 0 -1
+				0 1  0
+			</RotationMat>
+			<Mass>
+				<Total>2.057856</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>lbr6_convex.iv</Data>
+				<Render>lbr6.iv</Render>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+			</Geom>
+		</Body>
+		
+		<Joint name="arm_6_joint" type="hinge">
+			<Body>arm_5_link</Body>
+			<Body>arm_6_link</Body>
+			<OffsetFrom>arm_6_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.0943951023931953 2.0943951023931953</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>1.5708</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="arm_7_link" type="dynamic">
+			<OffsetFrom>arm_6_link</OffsetFrom>
+			<Translation>0 0.057 0.046</Translation>
+			<RotationMat>
+				1  0 0
+				0  0 1
+				0 -1 0
+			</RotationMat>
+			<Mass>
+				<Total>1.120198</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>lbr7_convex.iv</Data>
+				<Render>lbr7.iv</Render>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+			</Geom>
+		</Body>
+		
+		<Joint name="arm_7_joint" type="hinge">
+			<Body>arm_6_link</Body>
+			<Body>arm_7_link</Body>
+			<OffsetFrom>arm_7_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.9670597283903604 2.9670597283903604</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>1.5708</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<!-- adjacency information to avoid selfcollisions -->
+		<Adjacent>arm_0_link arm_1_link</Adjacent>
+		<Adjacent>arm_1_link arm_2_link</Adjacent>
+		<Adjacent>arm_2_link arm_3_link</Adjacent>
+		<Adjacent>arm_3_link arm_4_link</Adjacent>
+		<Adjacent>arm_4_link arm_5_link</Adjacent>
+		<Adjacent>arm_5_link arm_6_link</Adjacent>
+		<Adjacent>arm_5_link arm_7_link</Adjacent>
+		<Adjacent>arm_6_link arm_7_link</Adjacent>
+	</KinBody>
+	
+</Robot>

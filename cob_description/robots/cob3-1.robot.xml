@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Robot name="cob3-1">
+	<Robot file="../description/base_v1/base.robot.xml" />
+	<Robot file="../description/torso_v0/torso.robot.xml" />
+	<Robot file="../description/head_v1/head.robot.xml" />
+	<Robot file="../description/lbr_v0/lbr.robot.xml" />
+	<Robot file="../description/sdh_v0/sdh.robot.xml" />
+
+
+	<!-- Connection between base and arm -->
+	<KinBody>
+		<Body name="arm_0_link">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>-0.015982 -0.080992 0.875995</Translation>
+			<RotationMat>
+				0.96592567 0.18301278 -0.18301346
+				0.25881964 0.68301134 -0.68301384
+				0          0.70710808  0.70710548
+			</RotationMat>
+		</Body>
+
+		<Joint name="base_arm_joint" type="hinge" enable="false">
+			<Body>base_link</Body>
+			<Body>arm_0_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+	</KinBody>
+
+	<!-- Connection between base and torso -->
+	<KinBody>
+		<Body name="torso_root">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>0.155 0 0.892</Translation>
+			<RotationMat>
+				1  0  0
+				0 -1  0
+				0  0 -1
+			</RotationMat>
+		</Body>
+
+		<Joint name="base_torso_joint" type="hinge" enable="false">
+			<Body>base_link</Body>
+			<Body>torso_root</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+	</KinBody>
+
+	<!-- Connection between torso and head -->
+	<KinBody>
+		<Body name="head_root">
+			<OffsetFrom>torso_upper_neck_tilt_link</OffsetFrom>
+			<Translation>0 -0.154 0</Translation>
+			<RotationMat>
+				1  0  0
+				0 -1  0
+				0  0 -1
+			</RotationMat>
+		</Body>
+
+		<Joint name="torso_head_joint" type="hinge" enable="false">
+			<Body>torso_upper_neck_tilt_link</Body>
+			<Body>head_root</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+
+		<Adjacent>torso_upper_neck_tilt_link head_axis_link</Adjacent>
+		<Adjacent>head_cover_link head_axis_link</Adjacent>
+	</KinBody>
+
+	<!-- Connection between arm and sdh -->
+	<KinBody>
+		<Body name="sdh_palm_link">
+			<OffsetFrom>arm_7_link</OffsetFrom>
+			<Translation>0 0 0.02</Translation>
+			<RotationMat>
+				0 -1 0
+				1  0 0
+				0  0 1
+			</RotationMat>
+		</Body>
+
+		<Joint name="arm_sdh_joint" type="hinge" enable="false">
+			<Body>arm_7_link</Body>
+			<Body>sdh_palm_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+
+		<Adjacent>arm_7_link sdh_palm_link</Adjacent>
+	</KinBody>
+
+
+	<Manipulator name="arm">
+		<Base>arm_0_link</Base>
+		<Effector>arm_7_link</Effector>
+		<Translation>0 0 0.22</Translation>
+		<Joints>sdh_knuckle_joint sdh_finger_12_joint sdh_finger_13_joint sdh_finger_22_joint sdh_finger_23_joint sdh_thumb_2_joint sdh_thumb_3_joint</Joints>
+		<ClosingDirection>0 1 1 1 1 1 1</ClosingDirection>
+		<Direction>0 0 1</Direction>
+		<IkSolver>../ik/lbr.transform6d.x86_64.so</IkSolver>
+	</Manipulator>
+</Robot>

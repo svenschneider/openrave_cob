@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Robot name="sdh">
+	<KinBody>
+		<ModelsDir>../../meshes/sdh_v0/</ModelsDir>
+		
+		<Body name="sdh_palm_link">
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>palm.iv</Data>
+				<Render>palm.iv</Render>
+				<DiffuseColor>0.7 0.7 0.7</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Body name="sdh_grasp_link">
+			<Translation>0 0 0.15</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0 0 0</Extents>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_grasp_joint" type="hinge" enable="false">
+			<Body>sdh_palm_link</Body>
+			<Body>sdh_grasp_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+		
+		<!-- finger 1 -->
+		<Body name="sdh_finger_11_link" type="dynamic">
+			<OffsetFrom>sdh_palm_link</OffsetFrom>
+			<Translation>0.01905 0.033 0.0745</Translation>
+			<RotationMat>
+				-1  0 0
+				 0 -1 0
+				 0  0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>knuckle.iv</Data>
+				<Render>knuckle.iv</Render>
+				<DiffuseColor>0 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_knuckle_joint" type="hinge">
+			<Body>sdh_palm_link</Body>
+			<Body>sdh_finger_11_link</Body>
+			<OffsetFrom>sdh_finger_11_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>0 1.570796327</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="sdh_finger_12_link" type="dynamic">
+			<OffsetFrom>sdh_finger_11_link</OffsetFrom>
+			<Translation>0 0 0.0165</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>finger.iv</Data>
+				<Render>finger.iv</Render>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_finger_12_joint" type="hinge">
+			<Body>sdh_finger_11_link</Body>
+			<Body>sdh_finger_12_link</Body>
+			<OffsetFrom>sdh_finger_12_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-1.570796327 1.570796327</LimitsRad>
+			<Axis>0 1 0</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="sdh_finger_13_link" type="dynamic">
+			<OffsetFrom>sdh_finger_12_link</OffsetFrom>
+			<Translation>0 0 0.0865</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>finger_tip.iv</Data>
+				<Render>finger_tip.iv</Render>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_finger_13_joint" type="hinge">
+			<Body>sdh_finger_12_link</Body>
+			<Body>sdh_finger_13_link</Body>
+			<OffsetFrom>sdh_finger_13_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-1.570796327 1.570796327</LimitsRad>
+			<Axis>0 1 0</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<!-- finger 2 -->
+		<Body name="sdh_finger_21_link" type="dynamic">
+			<OffsetFrom>sdh_palm_link</OffsetFrom>
+			<Translation>0.01905 -0.033 0.0745</Translation>
+			<RotationMat>
+				-1  0 0
+				 0 -1 0
+				 0  0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>knuckle.iv</Data>
+				<Render>knuckle.iv</Render>
+				<DiffuseColor>0 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_finger_21_joint" type="hinge" enable="false" mimic_pos="sdh_knuckle_joint" mimic_vel="|sdh_knuckle_joint 1">
+			<Body>sdh_palm_link</Body>
+			<Body>sdh_finger_21_link</Body>
+			<OffsetFrom>sdh_finger_21_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>0 1.570796327</LimitsRad>
+			<Axis>0 0 -1</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="sdh_finger_22_link" type="dynamic">
+			<OffsetFrom>sdh_finger_21_link</OffsetFrom>
+			<Translation>0 0 0.0165</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>finger.iv</Data>
+				<Render>finger.iv</Render>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_finger_22_joint" type="hinge">
+			<Body>sdh_finger_21_link</Body>
+			<Body>sdh_finger_22_link</Body>
+			<OffsetFrom>sdh_finger_22_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-1.570796327 1.570796327</LimitsRad>
+			<Axis>0 1 0</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="sdh_finger_23_link" type="dynamic">
+			<OffsetFrom>sdh_finger_22_link</OffsetFrom>
+			<Translation>0 0 0.0865</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>finger_tip.iv</Data>
+				<Render>finger_tip.iv</Render>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_finger_23_joint" type="hinge">
+			<Body>sdh_finger_22_link</Body>
+			<Body>sdh_finger_23_link</Body>
+			<OffsetFrom>sdh_finger_23_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-1.570796327 1.570796327</LimitsRad>
+			<Axis>0 1 0</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<!-- thumb -->
+		<Body name="sdh_thumb_1_link" type="dynamic">
+			<OffsetFrom>sdh_palm_link</OffsetFrom>
+			<Translation>-0.03811 0 0.0745</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>knuckle.iv</Data>
+				<Render>knuckle.iv</Render>
+				<DiffuseColor>0 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_thumb_1_joint" type="hinge" enable="false">
+			<Body>sdh_palm_link</Body>
+			<Body>sdh_thumb_1_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+	
+		<Body name="sdh_thumb_2_link" type="dynamic">
+			<OffsetFrom>sdh_thumb_1_link</OffsetFrom>
+			<Translation>0 0 0.0165</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>finger.iv</Data>
+				<Render>finger.iv</Render>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_thumb_2_joint" type="hinge">
+			<Body>sdh_thumb_1_link</Body>
+			<Body>sdh_thumb_2_link</Body>
+			<OffsetFrom>sdh_thumb_2_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-1.570796327 1.570796327</LimitsRad>
+			<Axis>0 1 0</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="sdh_thumb_3_link" type="dynamic">
+			<OffsetFrom>sdh_thumb_2_link</OffsetFrom>
+			<Translation>0 0 0.0865</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>finger_tip.iv</Data>
+				<Render>finger_tip.iv</Render>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="sdh_thumb_3_joint" type="hinge">
+			<Body>sdh_thumb_2_link</Body>
+			<Body>sdh_thumb_3_link</Body>
+			<OffsetFrom>sdh_thumb_3_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-1.570796327 1.570796327</LimitsRad>
+			<Axis>0 1 0</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		
+		<!-- adjacency information to avoid selfcollisions -->
+		<Adjacent>sdh_palm_link sdh_finger_11_link</Adjacent>
+		<Adjacent>sdh_finger_11_link sdh_finger_12_link</Adjacent>
+		<Adjacent>sdh_finger_12_link sdh_finger_13_link</Adjacent>
+		<Adjacent>sdh_palm_link sdh_finger_21_link</Adjacent>
+		<Adjacent>sdh_finger_21_link sdh_finger_22_link</Adjacent>
+		<Adjacent>sdh_finger_22_link sdh_finger_23_link</Adjacent>
+		<Adjacent>sdh_palm_link sdh_thumb_1_link</Adjacent>
+		<Adjacent>sdh_thumb_1_link sdh_thumb_2_link</Adjacent>
+		<Adjacent>sdh_thumb_2_link sdh_thumb_3_link</Adjacent>
+	</KinBody>
+</Robot>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Robot name="head">
+	<KinBody>
+		<ModelsDir>../../meshes/head_v1/</ModelsDir>
+		
+		<Body name="head_root">
+			<Geom type="box">
+				<Extents>0 0 0</Extents>
+			</Geom>
+		</Body>
+		
+		<Body name="head_axis_link" type="dynamic">
+			<OffsetFrom>head_root</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.0001 0      0
+					0      0.0001 0
+					0      0      0.0001
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.01 0.01 0.12</Extents>
+				<DiffuseColor>0 0.8 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="head_axis_joint" type="hinge">
+			<Body>head_root</Body>
+			<Body>head_axis_link</Body>
+			<OffsetFrom>head_axis_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-3.2 0.25</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>1.0</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<!-- left camera -->
+		<Body name="head_color_camera_l_link" type="dynamic">
+			<OffsetFrom>head_axis_link</OffsetFrom>
+			<Translation>0 0 -0.06</Translation>
+			<RotationMat>
+				 0  0 -1
+				 0 -1  0
+				-1  0  0
+			</RotationMat>
+			<Mass>
+				<Total>0.01</Total>
+				<Inertia>
+					0.0001 0      0
+					0      0.0001 0
+					0      0      0.0001
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="cylinder">
+				<Radius>0.01</Radius>
+				<Height>0.075</Height>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0.015</Translation>
+				<RotationMat>
+					1 0  0
+					0 0 -1
+					0 1  0
+				</RotationMat>
+			</Geom>
+		</Body>
+
+		<Joint name="head_color_camera_l_joint" type="hinge" enable="false">
+			<Body>head_axis_link</Body>
+			<Body>head_color_camera_l_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+		
+		<!-- right camera -->
+		<Body name="head_color_camera_r_link" type="dynamic">
+			<OffsetFrom>head_color_camera_l_link</OffsetFrom>
+			<Translation>-0.12 0 0</Translation>
+			<RotationMat>
+				 1 0 0
+				 0 1 0
+				 0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.01</Total>
+				<Inertia>
+					0.0001 0      0
+					0      0.0001 0
+					0      0      0.0001
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="cylinder">
+				<Radius>0.01</Radius>
+				<Height>0.075</Height>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0.015</Translation>
+				<RotationMat>
+					1 0  0
+					0 0 -1
+					0 1  0
+				</RotationMat>
+			</Geom>
+		</Body>
+		
+		<Joint name="head_color_camera_r_joint" type="hinge" enable="false">
+			<Body>head_color_camera_l_link</Body>
+			<Body>head_color_camera_r_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+		
+		<!-- kinect -->
+		<Body name="head_cam3d_link" type="dynamic">
+			<OffsetFrom>head_color_camera_l_link</OffsetFrom>
+			<Translation>-0.06 0 0</Translation>
+			<RotationMat>
+				 -1  0 0
+				  0 -1 0
+				  0  0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.01</Total>
+				<Inertia>
+					0.0001 0      0
+					0      0.0001 0
+					0      0      0.0001
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.02 0.02 0.075</Extents>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0.015</Translation>
+				<RotationMat>
+					1 0 0
+					0 1 0
+					0 0 1
+				</RotationMat>
+			</Geom>
+		</Body>
+		
+		<Joint name="head_cam3d_joint" type="hinge" enable="false">
+			<Body>head_color_camera_l_link</Body>
+			<Body>head_cam3d_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+		
+		<Adjacent>head_axis_link head_color_camera_l_link</Adjacent>
+		<Adjacent>head_axis_link head_color_camera_r_link</Adjacent>
+		<Adjacent>head_axis_link head_cam3d_link</Adjacent>
+	</KinBody>
+	
+	
+	
+	<!-- left camera -->
+	<AttachedSensor name="head_color_camera_l">
+		<Link>head_color_camera_l_link</Link>
+		<Sensor type="BaseCamera">
+			<KK>1615 1615 697.69 530.51</KK>	<!-- <KK>fx fy cx cy</KK> -->
+			<Width>1280</Width>
+			<Height>960</Height>
+			<Distortion_Model>plumb_bob</Distortion_Model>
+			<!-- real values, but don't work in simulation -->
+			<!--
+			<Width>1338</Width>
+			<Height>1038</Height>
+			<Focal_Length>1615</Focal_Length>
+			-->
+			<FrameRate>5</FrameRate>
+			<Color>0.5 0.5 1</Color>
+		</Sensor>
+	</AttachedSensor>
+	
+	<!-- right camera -->
+	<AttachedSensor name="head_color_camera_r">
+		<Link>head_color_camera_r_link</Link>
+		<Sensor type="BaseCamera">
+			<KK>1615 1615 697.69 530.51</KK>	<!-- <KK>fx fy cx cy</KK> -->
+			<Width>1280</Width>
+			<Height>960</Height>
+			<Distortion_Model>plumb_bob</Distortion_Model>
+			<!-- real values, but don't work in simulation -->
+			<!--
+			<Width>1338</Width>
+			<Height>1038</Height>
+			<Focal_Length>1615</Focal_Length>
+			-->
+			<FrameRate>5</FrameRate>
+			<Color>0.5 0.5 1</Color>
+		</Sensor>
+	</AttachedSensor>
+	
+	<!-- kinect -->
+	<AttachedSensor name="head_cam3d">
+		<Link>head_cam3d_link</Link>
+		<Sensor type="BaseFlashLidar3D">
+			<MaxRange>10</MaxRange>
+			<ScanTime>0.2</ScanTime>
+			<KK>64 48 32 24</KK>
+			<Width>64</Width>
+			<Height>48</Height>
+			<Color>1 1 0</Color>
+		</Sensor>
+	</AttachedSensor>
+	
+</Robot>

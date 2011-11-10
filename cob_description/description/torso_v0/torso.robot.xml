@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Robot name="torso">
+	<KinBody>
+		<ModelsDir>../../meshes/torso_v0/</ModelsDir>
+	
+		<Body name="torso_root">
+			<Geom type="box">
+				<Extents>0 0 0</Extents>
+			</Geom>
+		</Body>
+	
+		<Body name="torso_tray_link" type="dynamic">
+			<OffsetFrom>torso_root</OffsetFrom>
+			<Translation>0.0856 -0.19 0.16</Translation>
+			<RotationMat>
+				1.0  0.0        0.0
+				0.0  0.70704    0.70717355
+				0.0 -0.70717355 0.70704
+			</RotationMat>
+			<Mass>
+				<Total>0.1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>tray_convex.iv</Data>
+				<Render>tray.iv</Render>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="torso_tray_joint" type="hinge">
+			<Body>torso_root</Body>
+			<Body>torso_tray_link</Body>
+			<OffsetFrom>torso_tray_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-3.31612 0.2</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+	
+		<Body name="torso_lower_neck_pan_link" type="dynamic">
+			<OffsetFrom>torso_root</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>1</Total>
+				<Inertia>
+					0.200549 0.001322 0
+					0.001322 0.123664 0
+					0        0        0.104101
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.01 0.01 0.01</Extents>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+				<Translation>0 0 0.005</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="torso_lower_neck_pan_joint" type="hinge">
+			<Body>torso_root</Body>
+			<Body>torso_lower_neck_pan_link</Body>
+			<OffsetFrom>torso_lower_neck_pan_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-3.14159 3.14159</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>0.5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="torso_lower_neck_tilt_link" type="dynamic">
+			<OffsetFrom>torso_lower_neck_pan_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0  0
+				0 0 -1
+				0 1  0
+			</RotationMat>
+			<Mass>
+				<Total>6.209720</Total>
+				<Inertia>
+					0.171118 0.002544 0
+					0.002544 0.083077 0
+					0        0        0.120948
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>lower_neck_convex.iv</Data>
+				<Render>lower_neck.iv</Render>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+	
+		<Joint name="torso_lower_neck_tilt_joint" type="hinge">
+			<Body>torso_lower_neck_pan_link</Body>
+			<Body>torso_lower_neck_tilt_link</Body>
+			<OffsetFrom>torso_lower_neck_tilt_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.094395102 2.094395102</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>0.5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="torso_upper_neck_pan_link" type="dynamic">
+			<OffsetFrom>torso_lower_neck_tilt_link</OffsetFrom>
+			<Translation>0 -0.237 0</Translation>
+			<RotationMat>
+				1  0 0
+				0  0 1
+				0 -1 0
+			</RotationMat>
+			<Mass>
+				<Total>1.0</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.01 0.01 0.01</Extents>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+				<Translation>0 0 0.005</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="torso_upper_neck_pan_joint" type="hinge">
+			<Body>torso_lower_neck_tilt_link</Body>
+			<Body>torso_upper_neck_pan_link</Body>
+			<OffsetFrom>torso_upper_neck_pan_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-3.14159 3.14159</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>0.5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="torso_upper_neck_tilt_link" type="dynamic">
+			<OffsetFrom>torso_upper_neck_pan_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0  0
+				0 0 -1
+				0 1  0
+			</RotationMat>
+			<Mass>
+				<Total>6.744238</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>upper_neck_convex.iv</Data>
+				<Render>upper_neck.iv</Render>
+				<DiffuseColor>0.7 0.7 0.7</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="torso_upper_neck_tilt_joint" type="hinge">
+			<Body>torso_upper_neck_pan_link</Body>
+			<Body>torso_upper_neck_tilt_link</Body>
+			<OffsetFrom>torso_upper_neck_tilt_link</OffsetFrom>
+			<Weight>1</Weight>
+			<LimitsRad>-2.094395102 2.094395102</LimitsRad>
+			<Axis>0 0 1</Axis>
+			<MaxVel>0.5</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="head_cover_link" type="dynamic">
+			<OffsetFrom>torso_upper_neck_tilt_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.5</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>head_cover_convex.iv</Data>
+				<Render>head_cover.iv</Render>
+				<DiffuseColor>0 0 0.8</DiffuseColor>
+				<Translation>0 0 0</Translation>
+				<Transparency>0.7</Transparency>
+			</Geom>
+		</Body>
+		
+		<Joint name="head_cover_joint" type="hinge" enable="false">
+			<Body>torso_upper_neck_tilt_link</Body>
+			<Body>head_cover_link</Body>
+				<Limits>0 0</Limits>
+		</Joint>
+		
+		<!-- adjacency information to avoid selfcollisions -->
+		<Adjacent>torso_base_link torso_lower_neck_pan_link</Adjacent>
+		<Adjacent>torso_lower_neck_pan_link torso_lower_neck_tilt_link</Adjacent>
+		<Adjacent>torso_lower_neck_tilt_link torso_upper_neck_pan_link</Adjacent>
+		<Adjacent>torso_upper_neck_pan_link torso_upper_neck_tilt_link</Adjacent>
+		<Adjacent>torso_upper_neck_tilt_link head_cover_link</Adjacent>
+	</KinBody>
+</Robot>

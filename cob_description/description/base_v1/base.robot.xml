@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Robot name="base">
+	<KinBody>
+		<ModelsDir>../../meshes/base_v1/</ModelsDir>
+		
+		<Body name="base_link">
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>116</Total>
+				<Inertia>
+					 5.652232699207 -0.009719934438  1.293988226423
+					-0.009719934438  5.669473158652 -0.007379583694
+					 1.293988226423 -0.007379583694  3.683196351726
+				</Inertia>
+				<Com>-0.061 0 0.293</Com>
+			</Mass>
+			<Geom type="trimesh">
+				<Data>base_collision.iv</Data>
+				<Render>base.iv</Render>
+				<DiffuseColor>0.7 0.7 0.7</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Body name="base_footprint">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>1</Total>
+				<Inertia>
+					0.01 0    0
+					0    0.01 0
+					0    0    0.01
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.001 0.001 0.001</Extents>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0.053</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="base_footprint_joint" type="hinge" enable="false">
+			<Body>base_link</Body>
+			<Body>base_footprint</Body>
+			<Limits>0 0</Limits>
+			<Weight>1</Weight>
+		</Joint>
+		
+		<!-- front left wheel -->
+		<Body name="fl_caster_rotation_link" type="dynamic">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>0.235 0.185 0.075</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>3.473082</Total>
+				<Inertia>
+					 0.012411765597 -0.000711733678  0.00050272983
+					-0.000711733678  0.015218160428 -0.000004273467
+					 0.00050272983  -0.000004273467  0.011763977943
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.001 0.001 0.001</Extents>
+				<DiffuseColor>0 0.8 0</DiffuseColor>
+				<Translation>0 0 0.002</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="fl_caster_rotation_joint" type="hinge" circular="true">
+			<Body>base_link</Body>
+			<Body>fl_caster_rotation_link</Body>
+			<OffsetFrom>fl_caster_rotation_link</OffsetFrom>
+			<Weight>1</Weight>
+			<Axis>0 0 1</Axis>
+			<MaxVel>100</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="fl_caster_wheel_link" type="dynamic">
+			<OffsetFrom>fl_caster_rotation_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.44036</Total>
+				<Inertia>
+					 0.012411765597 -0.000711733678  0.00050272983
+					-0.000711733678  0.015218160428 -0.000004273467
+					 0.00050272983  -0.000004273467  0.011763977943
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="cylinder">
+				<Radius>0.074792</Radius>
+				<Height>0.034</Height>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+				<RotationMat>
+					1 0 0
+					0 1 0
+					0 0 1
+				</RotationMat>
+			</Geom>
+		</Body>
+		
+		<Joint name="fl_caster_wheel_joint" type="hinge" circular="true">
+			<Body>fl_caster_rotation_link</Body>
+			<Body>fl_caster_wheel_link</Body>
+			<OffsetFrom>fl_caster_wheel_link</OffsetFrom>
+			<Weight>1</Weight>
+			<Axis>0 1 0</Axis>
+			<MaxVel>100</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<!-- front right wheel -->
+		<Body name="fr_caster_rotation_link" type="dynamic">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>0.235 -0.185 0.075</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>3.473082</Total>
+				<Inertia>
+					 0.012411765597 -0.000711733678  0.00050272983
+					-0.000711733678  0.015218160428 -0.000004273467
+					 0.00050272983  -0.000004273467  0.011763977943
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.001 0.001 0.001</Extents>
+				<DiffuseColor>0 0.8 0</DiffuseColor>
+				<Translation>0 0 0.002</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="fr_caster_rotation_joint" type="hinge" circular="true">
+			<Body>base_link</Body>
+			<Body>fr_caster_rotation_link</Body>
+			<OffsetFrom>fr_caster_rotation_link</OffsetFrom>
+			<Weight>1</Weight>
+			<Axis>0 0 1</Axis>
+			<MaxVel>100</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="fr_caster_wheel_link" type="dynamic">
+			<OffsetFrom>fr_caster_rotation_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.44036</Total>
+				<Inertia>
+					 0.012411765597 -0.000711733678  0.00050272983
+					-0.000711733678  0.015218160428 -0.000004273467
+					 0.00050272983  -0.000004273467  0.011763977943
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="cylinder">
+				<Radius>0.074792</Radius>
+				<Height>0.034</Height>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+				<RotationMat>
+					1 0 0
+					0 1 0
+					0 0 1
+				</RotationMat>
+			</Geom>
+		</Body>
+		
+		<Joint name="fr_caster_wheel_joint" type="hinge" circular="true">
+			<Body>fr_caster_rotation_link</Body>
+			<Body>fr_caster_wheel_link</Body>
+			<OffsetFrom>fr_caster_wheel_link</OffsetFrom>
+			<Weight>1</Weight>
+			<Axis>0 1 0</Axis>
+			<MaxVel>100</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<!-- rear left wheel -->
+		<Body name="bl_caster_rotation_link" type="dynamic">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>-0.235 0.185 0.075</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>3.473082</Total>
+				<Inertia>
+					 0.012411765597 -0.000711733678  0.00050272983
+					-0.000711733678  0.015218160428 -0.000004273467
+					 0.00050272983  -0.000004273467  0.011763977943
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.001 0.001 0.001</Extents>
+				<DiffuseColor>0 0.8 0</DiffuseColor>
+				<Translation>0 0 0.002</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="bl_caster_rotation_joint" type="hinge" circular="true">
+			<Body>base_link</Body>
+			<Body>bl_caster_rotation_link</Body>
+			<OffsetFrom>bl_caster_rotation_link</OffsetFrom>
+			<Weight>1</Weight>
+			<Axis>0 0 1</Axis>
+			<MaxVel>100</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="bl_caster_wheel_link" type="dynamic">
+			<OffsetFrom>bl_caster_rotation_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.44036</Total>
+				<Inertia>
+					 0.012411765597 -0.000711733678  0.00050272983
+					-0.000711733678  0.015218160428 -0.000004273467
+					 0.00050272983  -0.000004273467  0.011763977943
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="cylinder">
+				<Radius>0.074792</Radius>
+				<Height>0.034</Height>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+				<RotationMat>
+					1 0 0
+					0 1 0
+					0 0 1
+				</RotationMat>
+			</Geom>
+		</Body>
+		
+		<Joint name="bl_caster_wheel_joint" type="hinge" circular="true">
+			<Body>bl_caster_rotation_link</Body>
+			<Body>bl_caster_wheel_link</Body>
+			<OffsetFrom>bl_caster_wheel_link</OffsetFrom>
+			<Weight>1</Weight>
+			<Axis>0 1 0</Axis>
+			<MaxVel>100</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<!-- rear right wheel -->
+		<Body name="br_caster_rotation_link" type="dynamic">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>-0.235 -0.185 0.075</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>3.473082</Total>
+				<Inertia>
+					 0.012411765597 -0.000711733678  0.00050272983
+					-0.000711733678  0.015218160428 -0.000004273467
+					 0.00050272983  -0.000004273467  0.011763977943
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.001 0.001 0.001</Extents>
+				<DiffuseColor>0.0 0.8 0.0</DiffuseColor>
+				<Translation>0 0 0.002</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="br_caster_rotation_joint" type="hinge" circular="true">
+			<Body>base_link</Body>
+			<Body>br_caster_rotation_link</Body>
+			<OffsetFrom>br_caster_rotation_link</OffsetFrom>
+			<Weight>1</Weight>
+			<Axis>0 0 1</Axis>
+			<MaxVel>100</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<Body name="br_caster_wheel_link" type="dynamic">
+			<OffsetFrom>br_caster_rotation_link</OffsetFrom>
+			<Translation>0 0 0</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.44036</Total>
+				<Inertia>
+					 0.012411765597 -0.000711733678  0.00050272983
+					-0.000711733678  0.015218160428 -0.000004273467
+					 0.00050272983  -0.000004273467  0.011763977943
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="cylinder">
+				<Radius>0.074792</Radius>
+				<Height>0.034</Height>
+				<DiffuseColor>0.8 0.0 0.0</DiffuseColor>
+				<Translation>0.0 0.0 0.0</Translation>
+				<RotationMat>
+					1 0 0
+					0 1 0
+					0 0 1
+				</RotationMat>
+			</Geom>
+		</Body>
+		
+		<Joint name="br_caster_wheel_joint" type="hinge" circular="true">
+			<Body>br_caster_rotation_link</Body>
+			<Body>br_caster_wheel_link</Body>
+			<OffsetFrom>br_caster_wheel_link</OffsetFrom>
+			<Weight>1</Weight>
+			<Axis>0 1 0</Axis>
+			<MaxVel>100</MaxVel>
+			<Resolution>1</Resolution>
+		</Joint>
+		
+		<!-- laser scanner front -->
+		<Body name="base_laser_front_link" type="dynamic">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>0.325 0 0.135</Translation>
+			<RotationMat>
+				1 0 0
+				0 1 0
+				0 0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.001</Total>
+				<Inertia>
+					0.0001 0        0
+					0      0.000001 0
+					0      0        0.0001
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.001 0.001 0.001</Extents>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="base_laser_front_joint" type="hinge" enable="false">
+			<Body>base_link</Body>
+			<Body>base_laser_front_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+		
+		<!-- laser scanner rear -->
+		<Body name="base_laser_rear_link" type="dynamic">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>-0.325 0 0.135</Translation>
+			<RotationMat>
+				-1  0 0
+				 0 -1 0
+				 0  0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.001</Total>
+				<Inertia>
+					0.0001 0        0
+					0      0.000001 0
+					0      0        0.0001
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.001 0.001 0.001</Extents>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="base_laser_rear_joint" type="hinge" enable="false">
+			<Body>base_link</Body>
+			<Body>base_laser_rear_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+		
+		<!-- laser scanner top -->
+		<Body name="base_laser_top_link" type="dynamic">
+			<OffsetFrom>base_link</OffsetFrom>
+			<Translation>-0.252 0 0.42</Translation>
+			<RotationMat>
+				-1  0 0
+				 0 -1 0
+				 0  0 1
+			</RotationMat>
+			<Mass>
+				<Total>0.001</Total>
+				<Inertia>
+					0.0001 0        0
+					0      0.000001 0
+					0      0        0.0001
+				</Inertia>
+				<Com>0 0 0</Com>
+			</Mass>
+			<Geom type="box">
+				<Extents>0.001 0.001 0.001</Extents>
+				<DiffuseColor>0.8 0 0</DiffuseColor>
+				<Translation>0 0 0</Translation>
+			</Geom>
+		</Body>
+		
+		<Joint name="base_laser_top_joint" type="hinge" enable="false">
+			<Body>base_link</Body>
+			<Body>base_laser_top_link</Body>
+			<Limits>0 0</Limits>
+		</Joint>
+		
+	</KinBody>
+	
+	
+	
+	<!-- base laser front -->
+	<AttachedSensor name="base_laser_front">
+		<Link>base_laser_front_link</Link>
+		<Sensor type="BaseLaser2D">
+			<MinAngle>-135</MinAngle>
+			<MaxAngle>135</MaxAngle>
+			<Resolution>0.35</Resolution>
+			<MinRange>0.05</MinRange>
+			<MaxRange>30</MaxRange>
+			<ScanTime>0.1</ScanTime>
+			<Color>1 0 0</Color>
+		</Sensor>
+	</AttachedSensor>
+	
+	<!-- base laser rear -->
+	<AttachedSensor name="base_laser_rear">
+		<Link>base_laser_rear_link</Link>
+		<Sensor type="BaseLaser2D">
+			<MinAngle>-135</MinAngle>
+			<MaxAngle>135</MaxAngle>
+			<Resolution>0.35</Resolution>
+			<MinRange>0.05</MinRange>
+			<MaxRange>30</MaxRange>
+			<ScanTime>0.1</ScanTime>
+			<Color>1 0 0</Color>
+		</Sensor>
+	</AttachedSensor>
+	
+	<!-- base laser top -->
+	<AttachedSensor name="base_laser_top">
+		<Link>base_laser_top_link</Link>
+		<Sensor type="BaseLaser2D">
+			<MinAngle>-135</MinAngle>
+			<MaxAngle>135</MaxAngle>
+			<Resolution>0.35</Resolution>
+			<MinRange>0.05</MinRange>
+			<MaxRange>10</MaxRange>
+			<ScanTime>0.1</ScanTime>
+			<Color>0 1 0</Color>
+		</Sensor>
+	</AttachedSensor>
+	
+</Robot>
